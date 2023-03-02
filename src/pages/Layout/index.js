@@ -1,16 +1,26 @@
 import { Layout, Menu, Popconfirm } from 'antd'
-import { Outlet, Link, useLocation } from 'react-router-dom'
 import {
   HomeOutlined,
   DiffOutlined,
   EditOutlined,
   LogoutOutlined
 } from '@ant-design/icons'
+import { Outlet, Link, useLocation } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
+
 import './index.scss'
+import { useEffect } from 'react'
+import { useStore } from '@/store'
 
 const { Header, Sider } = Layout
 
 const GeekLayout = () => {
+  const { userStore } = useStore()
+  useEffect(() => {
+    userStore.getUserInfo()
+  }, [userStore])
+  // console.log(userStore.userInfo.name)
+
   const location = useLocation()
   // console.log('location', location)
   return (
@@ -18,7 +28,7 @@ const GeekLayout = () => {
       <Header className="header">
         <div className="logo" />
         <div className="user-info">
-          <span className="user-name">user.name</span>
+          <span className="user-name">{userStore.userInfo.name}</span>
           <span className="user-logout">
             <Popconfirm title="是否确认退出？" okText="退出" cancelText="取消">
               <LogoutOutlined /> 退出
@@ -55,4 +65,4 @@ const GeekLayout = () => {
   )
 }
 
-export default GeekLayout
+export default observer(GeekLayout)
