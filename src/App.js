@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthComponent } from '@/components/AuthComponent'
 import Layout from '@/pages/Layout'
 import Login from '@/pages/Login'
+import './App.css'
 
 function App () {
   return (
