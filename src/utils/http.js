@@ -1,6 +1,7 @@
 // 封装axios
 import axios from 'axios'
 import { getToken } from './token'
+import { history } from './history'
 
 const http = axios.create({
   baseURL: 'http://geek.itheima.net/v1_0',
@@ -27,6 +28,11 @@ http.interceptors.response.use((response) => {
 }, (error) => {
   // 超出 2xx 范围的状态码都会触发该函数。
   // 对响应错误做点什么
+  if (error.response.status === 401) { // 401一般是token过时了，或者得到无效token
+    // 此时并非在react context中，而是在js代码里，于组件没有关系
+    // 所以不能直接通过useNavigate来跳转，要用history
+    history.push('/login')
+  }
   return Promise.reject(error)
 })
 
