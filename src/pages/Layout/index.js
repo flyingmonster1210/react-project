@@ -55,16 +55,24 @@ const GeekLayout = () => {
             defaultSelectedKeys={[location.pathname]}
             selectedKeys={[location.pathname]}
             style={{ height: '100%', borderRight: 0 }}
+            items={[
+              {
+                key: '/',
+                icon: <HomeOutlined />,
+                label: <Link to={'/'}>数据概览</Link>
+              },
+              {
+                key: '/article',
+                icon: <DiffOutlined />,
+                label: <Link to={'/article'}>内容管理</Link>
+              },
+              {
+                key: '/publish',
+                icon: <EditOutlined />,
+                label: <Link to={'/publish'}>发布文章</Link>
+              },
+            ]}
           >
-            <Menu.Item icon={<HomeOutlined />} key="/">
-              <Link to={'/'}>数据概览</Link>
-            </Menu.Item>
-            <Menu.Item icon={<DiffOutlined />} key="/article">
-              <Link to={'/article'}>内容管理</Link>
-            </Menu.Item>
-            <Menu.Item icon={<EditOutlined />} key="/publish">
-              <Link to={'/publish'}>发布文章</Link>
-            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="layout-content" style={{ padding: 20 }}>
